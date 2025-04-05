@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { BooleanToTextPipe } from '../../pipes/boolean-to-text.pipe';
 import { FormDropdownFieldComponent } from './components/form-dropdown-field/form-dropdown-field.component';
 import { GenericDropdownFieldComponent } from './components/generic-dropdown-field/generic-dropdown-field.component';
 import { FieldDropdownDefinitionModel } from './dropdown-field.model';
@@ -15,7 +14,6 @@ import { FieldDropdownDefinitionModel } from './dropdown-field.model';
   selector: 'app-dropdown-field',
   templateUrl: './dropdown-field.component.html',
   imports: [
-    BooleanToTextPipe,
     CommonModule,
     MatSelectModule,
     FormsModule,

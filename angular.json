@@ -55,7 +55,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -119,6 +121,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -126,5 +129,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "0c865b7d-3ffd-4940-a2e8-724e3d9ae92e"
   }
 }
