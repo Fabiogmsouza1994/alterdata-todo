@@ -2,6 +2,7 @@
   <label *ngIf="label" class="fs-6 fw-bold mb-2" [for]="id">{{ label }}</label>
   <ng-container *ngIf="!fieldName; else formDropdownField">
     <app-generic-dropdown-field
+      [disabled]="disabled"
       [dropdownValue]="dropdownValue"
       [dropdownItens]="dropdownItens"
       (dropdownValueChange)="onDropdownChange($event)"
@@ -13,6 +14,7 @@
       [label]="label"
       [dropdownItens]="dropdownItens"
       [fieldName]="fieldName"
+      [disabled]="disabled"
     ></app-form-dropdown-field>
   </ng-template>
 </div>

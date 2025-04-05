@@ -33,6 +33,7 @@ import { FieldDropdownDefinitionModel } from '../../dropdown-field.model';
 export class FormDropdownFieldComponent<T> implements OnInit {
   @Input() id!: string;
   @Input() label!: string;
+  @Input() disabled!: boolean;
   @Input() dropdownItens!: FieldDropdownDefinitionModel<T>;
   @Input() fieldName!: string;
   @Output() selectedValue: EventEmitter<T> = new EventEmitter<T>();

@@ -15,6 +15,7 @@
         [dropdownValue]="dropDownSelectedValue"
         (dropdownValueChange)="onOptionSelected($event)"
         [dropdownItens]="tableFilter.dropdownDefinition"
+        [disabled]="!!inputValue"
       ></app-dropdown-field>
     </ng-container>
   </div>
@@ -22,10 +23,10 @@
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container
       *ngFor="let colHeader of columnsToDisplay"
-      [matColumnDef]="colHeader"
+      [matColumnDef]="colHeader.colHeaderValue"
     >
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <span class="fs-6">{{ colHeader }}</span>
+        <span class="fs-6">{{ colHeader.colHeaderText }}</span>
       </th>
       <td
         class="text-truncate"
@@ -35,29 +36,29 @@
       >
         <ng-container *ngIf="editingRows[i]; else displayCell">
           <app-dropdown-field
-            *ngIf="typeof row[colHeader] === 'boolean'; else normalInput"
-            [(dropdownValue)]="row[colHeader]"
+            *ngIf="typeof row[colHeader.colHeaderValue] === 'boolean'; else normalInput"
+            [(dropdownValue)]="row[colHeader.colHeaderValue]"
           ></app-dropdown-field>
           <ng-template #normalInput>
             <app-input-field
               class="edit-input"
-              [(inputValue)]="row[colHeader]"
+              [(inputValue)]="row[colHeader.colHeaderValue]"
             ></app-input-field>
           </ng-template>
         </ng-container>
 
         <ng-template #displayCell>
           <ng-container
-            *ngIf="typeof row[colHeader] === 'boolean'; else normalRow"
+            *ngIf="typeof row[colHeader.colHeaderValue] === 'boolean'; else normalRow"
           >
             <span class="fs-6">
-              {{ row[colHeader] | booleanToText }}
+              {{ row[colHeader.colHeaderValue] | booleanToText }}
             </span>
           </ng-container>
         </ng-template>
 
         <ng-template #normalRow>
-          <span class="fs-6">{{ row[colHeader] }}</span>
+          <span class="fs-6">{{ row[colHeader.colHeaderValue] }}</span>
         </ng-template>
       </td>
     </ng-container>
@@ -76,9 +77,9 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
+    <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef class="text-center fs-6">
-        Actions
+        Editar
       </th>
       <td mat-cell *matCellDef="let row; let i = index">
         <ng-container *ngIf="editingRows[i]; else editButton">
@@ -106,7 +107,6 @@
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
-    aria-label="Select page of periodic elements"
   >
   </mat-paginator>
 </div>

@@ -1,8 +1,9 @@
 <select
+  class="col-12"
   [id]="id"
   [ngClass]="isFormControlValueInvalid ? 'required' : 'default'"
   [formControl]="formControl"
-  class="col-12"
+  [disabled]="disabled"
 >
   <option
     *ngFor="let option of dropdownItens.dropdownList"

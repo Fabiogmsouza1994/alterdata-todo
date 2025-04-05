@@ -30,6 +30,7 @@ export class DropdownFieldComponent<T> {
   @Input() dropdownItens!: FieldDropdownDefinitionModel<T>;
   @Input() fieldName!: string;
   @Input() dropdownValue!: T;
+  @Input() disabled = false;
   @Output() dropdownValueChange: EventEmitter<T> = new EventEmitter<T>();
 
   formControlProp!: FormControl;

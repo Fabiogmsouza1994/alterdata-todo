@@ -19,6 +19,7 @@ import { FieldDropdownDefinitionModel } from '../../utils/dropdown-field/dropdow
 import { InputFieldComponent } from '../../utils/input-field/input-field.component';
 import { TableComponent } from '../../utils/table/table.component';
 import {
+  tableColHeaderConfigModel,
   tableEditingModel,
   TableFilterDataModel,
   TableFilterModel
@@ -60,8 +61,11 @@ export class TodoPageComponent implements OnInit {
 
   form: FormGroup;
   dataSource!: TodoModel[];
-  columnsToDisplay: string[] = ['title', 'completed'];
-  loaded: boolean = false;
+  columnsToDisplay: tableColHeaderConfigModel[] = [
+    {colHeaderText: 'Id usuário', colHeaderValue: 'userId'}, 
+    {colHeaderText: 'Tarefa', colHeaderValue: 'title'}, 
+    {colHeaderText: 'Status', colHeaderValue: 'completed'}
+  ]
 
   tableEditOptions: tableEditingModel = {
     allowAll: true,
@@ -136,6 +140,7 @@ export class TodoPageComponent implements OnInit {
 
   onInsertInTable(): void {
     const body: TodoModel = {
+      userId: 1,
       title: this.form.get('taskDescription')?.value,
       completed: this.form.get('taskStatus')?.value,
     };

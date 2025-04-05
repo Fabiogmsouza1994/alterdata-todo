@@ -17,10 +17,14 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { BooleanToTextPipe } from '../../pipes/boolean-to-text.pipe';
-import { tableEditingModel, TableFilterDataModel, TableFilterModel } from './table.model';
+import {
+  tableColHeaderConfigModel,
+  tableEditingModel,
+  TableFilterDataModel,
+  TableFilterModel,
+} from './table.model';
 import { TableService } from './table.service';
 import { DropdownFieldComponent } from '../dropdown-field/dropdown-field.component';
-import { FieldDropdownDefinitionModel } from '../dropdown-field/dropdown-field.model';
 import { InputFieldComponent } from '../input-field/input-field.component';
 
 @Component({
@@ -40,13 +44,15 @@ import { InputFieldComponent } from '../input-field/input-field.component';
     DropdownFieldComponent,
   ],
 })
-export class TableComponent<T, U extends TableFilterDataModel> implements OnInit, OnChanges {
+export class TableComponent<T, U extends TableFilterDataModel>
+  implements OnInit, OnChanges
+{
   @Input() set tableData(data: T[]) {
     this.dataSource = new MatTableDataSource<T>(data || []);
   }
 
   @Input() id!: string;
-  @Input() columnsToDisplay!: string[];
+  @Input() columnsToDisplay!: tableColHeaderConfigModel[];
   @Input() editOptions!: tableEditingModel;
   @Input() tableFilter!: TableFilterModel<U>;
   @Output() deletedRow: EventEmitter<T> = new EventEmitter<T>();
@@ -82,6 +88,23 @@ export class TableComponent<T, U extends TableFilterDataModel> implements OnInit
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    this.dataSource.filterPredicate = (data: T, filter: string) => {
+      const filterValue: string = filter.trim().toLowerCase();
+
+      const dataToFilter: string = Object.entries(data as object)
+        .filter(([key, value]) => {
+          if (key === 'edit') return false;
+          if (this.inputValue && typeof value === 'boolean') return false;
+
+          return true;
+        })
+        .map(([_, value]) => value?.toString() ?? '')
+        .join(' ')
+        .toLowerCase();
+
+      return dataToFilter.includes(filterValue);
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -128,16 +151,26 @@ export class TableComponent<T, U extends TableFilterDataModel> implements OnInit
     }
   }
 
-
   onDeleteRow(row: T): void {
     this._rowToDelete = row;
     this.deletedRow.emit(row);
   }
 
   getDisplayedColumns(): string[] {
-    return this.editOptions.allowExclusion || this.editOptions.allowAll
-      ? [...this.columnsToDisplay, 'delete', 'actions']
-      : this.columnsToDisplay;
+    const columnsToShow: string[] = this.columnsToDisplay.map(
+      (value: tableColHeaderConfigModel) => value.colHeaderValue
+    );
+
+    if (this.editOptions.allowAll) {
+      return [...columnsToShow, 'delete', 'edit'];
+    } else {
+      const editColumns: string[] = [];
+
+      if (this.editOptions.allowExclusion) editColumns.push('delete');
+      if (this.editOptions.allowInsertion) editColumns.push('edit');
+
+      return [...columnsToShow, ...editColumns];
+    }
   }
 
   editRow(row: T, index: number): void {
@@ -161,4 +194,3 @@ export class TableComponent<T, U extends TableFilterDataModel> implements OnInit
     }
   }
 }
-

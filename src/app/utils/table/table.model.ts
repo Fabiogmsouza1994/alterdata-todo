@@ -2,6 +2,12 @@ import {
   FieldDropdownDefinitionModel,
 } from '../dropdown-field/dropdown-field.model';
 
+
+export interface tableColHeaderConfigModel {
+  colHeaderText: string;
+  colHeaderValue: string;
+}
+
 export interface tableEditingModel {
   allowInsertion?: boolean;
   allowExclusion?: boolean;

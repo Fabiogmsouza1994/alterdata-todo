@@ -28,6 +28,7 @@ export class InputFieldComponent {
   @Input() upperCase!: boolean;
   @Input() lowerCase!: boolean;
   @Input() inputValue!: string | number;
+  @Input() disabled: boolean = false;
   @Output() inputValueChange: EventEmitter<string | number> = new EventEmitter<
     string | number
   >();

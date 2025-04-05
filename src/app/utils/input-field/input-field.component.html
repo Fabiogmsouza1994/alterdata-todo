@@ -4,6 +4,7 @@
     <app-generic-input-field
       [type]="type"
       [inputValue]="inputValue"
+      [disabled]="disabled"
       (inputValueChange)="onTextTyped($event)"
     ></app-generic-input-field>
   </ng-container>
@@ -16,6 +17,7 @@
       [maxLength]="maxLength"
       [upperCase]="upperCase"
       [lowerCase]="lowerCase"
+      [disabled]="disabled"
     ></app-form-input-field>
   </ng-template>
 </div>

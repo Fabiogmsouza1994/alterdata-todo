@@ -12,6 +12,7 @@ import { FieldDropdownDefinitionModel } from '../../dropdown-field.model';
 export class GenericDropdownFieldComponent<T> {
   @Input() id!: string;
   @Input() label!: string;
+  @Input() disabled!: boolean;
   @Input() dropdownItens!: FieldDropdownDefinitionModel<T>;
   @Input() dropdownValue!: T;
   @Output() dropdownValueChange: EventEmitter<T> = new EventEmitter<T>();
