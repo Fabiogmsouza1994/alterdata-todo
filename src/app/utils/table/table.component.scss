@@ -1,0 +1,21 @@
+table {
+    table-layout: fixed;
+    overflow-x: auto;
+  }
+  
+  .mat-cell, .mat-header-cell {
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .edit-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }

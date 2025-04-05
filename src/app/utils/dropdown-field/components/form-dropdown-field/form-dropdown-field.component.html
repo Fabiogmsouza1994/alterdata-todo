@@ -1,0 +1,17 @@
+<select
+  [id]="id"
+  [ngClass]="isFormControlValueInvalid ? 'required' : 'default'"
+  [formControl]="formControl"
+  class="col-12"
+>
+  <option
+    *ngFor="let option of dropdownItens.dropdownList"
+    [ngValue]="option[dropdownItens.dropdownValue]"
+  >
+    {{ option[dropdownItens.dropdownLabel] }}
+  </option>
+</select>
+
+<small class="fw-bold fs-6 text-danger" *ngIf="defineValidationMsg()">{{
+  validationText
+}}</small>

@@ -1,0 +1,18 @@
+<div class="d-flex flex-column my-3">
+  <label *ngIf="label" class="fs-6 fw-bold mb-2" [for]="id">{{ label }}</label>
+  <ng-container *ngIf="!fieldName; else formDropdownField">
+    <app-generic-dropdown-field
+      [dropdownValue]="dropdownValue"
+      [dropdownItens]="dropdownItens"
+      (dropdownValueChange)="onDropdownChange($event)"
+    ></app-generic-dropdown-field>
+  </ng-container>
+
+  <ng-template #formDropdownField>
+    <app-form-dropdown-field
+      [label]="label"
+      [dropdownItens]="dropdownItens"
+      [fieldName]="fieldName"
+    ></app-form-dropdown-field>
+  </ng-template>
+</div>

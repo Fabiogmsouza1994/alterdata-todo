@@ -1,16 +1,19 @@
+import { SpinnerService } from './services/loading.service';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TodoPageComponent } from './components/todo-page/todo-page.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
-  `,
-  styleUrl: './app.component.scss'
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  imports: [RouterOutlet, CommonModule, MatProgressSpinnerModule],
+  
 })
 export class AppComponent {
   title = 'alterdata-todo';
+
+  constructor(public spinnerService: SpinnerService) {}
 }

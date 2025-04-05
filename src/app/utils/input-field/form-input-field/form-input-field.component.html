@@ -1,0 +1,17 @@
+<div class="d-flex flex-column">
+  <label class="fs-6 fw-bold" [for]="id">{{ label }}</label>
+  <input
+    matInput
+    [id]="id"
+    [name]="fieldName"
+    [type]="type"
+    [ngClass]="formControl.invalid ? 'required' : 'default'"
+    [formControlName]="fieldName"
+    [attr.maxlength]="maxLength"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+  />
+  <small class="fw-bold fs-6 text-danger" *ngIf="defineValidationMsg()">{{
+    validationText
+  }}</small>
+</div>

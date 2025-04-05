@@ -1,0 +1,42 @@
+<form [formGroup]="form" class="mb-5">
+  <div class="row">
+    <app-input-field
+      class="col-12 col-md-5"
+      type="text"
+      id="taskDescription"
+      fieldName="taskDescription"
+      maxLength="25"
+      label="Descrição tarefa"
+    ></app-input-field>
+
+    <app-dropdown-field
+      class="col-12 col-md-5"
+      label="Status tarefa"
+      fieldName="taskStatus"
+      [dropdownItens]="dropdownItens"
+    ></app-dropdown-field>
+
+    <button
+      class="col-12 col-md-2 mt-5"
+      mat-raised-button
+      [disabled]="form.invalid"
+      (click)="onInsertInTable()"
+    >
+      Inserir
+    </button>
+  </div>
+</form>
+
+<div class="row">
+  <h2 class="fs-3 py-2">Lista de tarefas</h2>
+  <app-table
+    class="col-12"
+    id="id"
+    [tableData]="dataSource"
+    [columnsToDisplay]="columnsToDisplay"
+    [editOptions]="tableEditOptions"
+    [tableFilter]="tableFilter"
+    (deletedRow)="onDeleteRow($event)"
+    (updatedRow)="onUpdateRow($event)"
+  ></app-table>
+</div>

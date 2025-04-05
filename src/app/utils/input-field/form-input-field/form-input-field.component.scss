@@ -1,0 +1,39 @@
+.required {
+    @extend .input-style;
+    border: 2px solid rgb(216, 11, 11);
+  }
+  
+  .required:focus {
+    @extend .input-style;
+    @extend .input-style-focused;
+  }
+  
+  .default {
+    @extend .input-style;
+    border: 2px solid rgb(198, 197, 197);
+  }
+  
+  .default:focus {
+    @extend .input-style;
+    @extend .input-style-focused;
+  }
+  
+  .input-style {
+    border-radius: 4px;
+    padding: 1% 1%;
+    color: rgb(48, 48, 48);
+  }
+  
+  .input-style-focused {
+    outline: none !important;
+    box-shadow: 0 0 10px #719ece;
+    border: 2px solid rgb(198, 197, 197);
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  

@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button.mat-mdc-raised-button:not([disabled]) {
+    background: linear-gradient(90deg, #4776e6, #8e54e9) !important;
+    color: white !important;
+    border-radius: 5px;
+    height: 38px;
+  }
+
+  button.mat-mdc-raised-button[disabled] {
+    border-radius: 5px;
+    height: 38px;
+  }

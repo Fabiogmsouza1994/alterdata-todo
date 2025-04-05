@@ -1,0 +1,19 @@
+<select class="col-12 p-1" [(ngModel)]="dropdownValue" (change)="onOptionSelected()">
+  <ng-container *ngIf="allValuesAreBoolean() || !!dropdownItens; else booleanFormattedOptions">
+    <option
+      *ngFor="let option of dropdownItens.dropdownList"
+      [ngValue]="option"
+    >
+      {{ option[dropdownItens.dropdownLabel] }}
+    </option>
+  </ng-container>
+
+  <ng-template #booleanFormattedOptions>
+    <option [ngValue]="true">
+      <span class="fs-4">{{ true | booleanToText }}</span>
+    </option>
+    <option [ngValue]="false">
+      <span class="fs-4">{{ false | booleanToText }}</span>
+    </option>
+  </ng-template>
+</select>

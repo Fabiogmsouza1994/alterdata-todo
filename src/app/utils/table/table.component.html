@@ -1,0 +1,112 @@
+<div class="table-wrapper">
+  <div class="d-flex flex-row">
+    <ng-container *ngIf="tableFilter.inputFieldLabel">
+      <app-input-field
+        class="col-12 col-md-3"
+        [label]="tableFilter.inputFieldLabel"
+        [inputValue]="inputValue"
+        (inputValueChange)="onTextTyped($event)"
+      ></app-input-field>
+    </ng-container>
+    <ng-container *ngIf="tableFilter.dropdownDefinition">
+      <app-dropdown-field
+        class="col-12 col-md-3"
+        [label]="tableFilter.dropdownFieldLabel"
+        [dropdownValue]="dropDownSelectedValue"
+        (dropdownValueChange)="onOptionSelected($event)"
+        [dropdownItens]="tableFilter.dropdownDefinition"
+      ></app-dropdown-field>
+    </ng-container>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container
+      *ngFor="let colHeader of columnsToDisplay"
+      [matColumnDef]="colHeader"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="fs-6">{{ colHeader }}</span>
+      </th>
+      <td
+        class="text-truncate"
+        style="max-width: 300px"
+        mat-cell
+        *matCellDef="let row; let i = index"
+      >
+        <ng-container *ngIf="editingRows[i]; else displayCell">
+          <app-dropdown-field
+            *ngIf="typeof row[colHeader] === 'boolean'; else normalInput"
+            [(dropdownValue)]="row[colHeader]"
+          ></app-dropdown-field>
+          <ng-template #normalInput>
+            <app-input-field
+              class="edit-input"
+              [(inputValue)]="row[colHeader]"
+            ></app-input-field>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #displayCell>
+          <ng-container
+            *ngIf="typeof row[colHeader] === 'boolean'; else normalRow"
+          >
+            <span class="fs-6">
+              {{ row[colHeader] | booleanToText }}
+            </span>
+          </ng-container>
+        </ng-template>
+
+        <ng-template #normalRow>
+          <span class="fs-6">{{ row[colHeader] }}</span>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container
+      *ngIf="editOptions.allowAll || editOptions.allowExclusion"
+      matColumnDef="delete"
+    >
+      <th mat-header-cell *matHeaderCellDef class="text-center fs-6">Delete</th>
+      <td mat-cell *matCellDef="let row">
+        <span class="d-flex justify-content-center">
+          <button mat-button color="warn" (click)="onDeleteRow(row)">
+            Delete
+          </button>
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="text-center fs-6">
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let row; let i = index">
+        <ng-container *ngIf="editingRows[i]; else editButton">
+          <span class="d-flex justify-content-center">
+            <button mat-button color="primary" (click)="saveRow(row, i)">
+              Save
+            </button>
+            <button mat-button color="warn" (click)="cancelEdit(i)">
+              Cancel
+            </button>
+          </span>
+        </ng-container>
+        <ng-template #editButton>
+          <span class="d-flex justify-content-center">
+            <button mat-button (click)="editRow(row, i)">Edit</button>
+          </span>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

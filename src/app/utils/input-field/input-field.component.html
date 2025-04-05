@@ -1,0 +1,21 @@
+<div class="d-flex flex-column my-3">
+  <label *ngIf="label" class="fs-6 fw-bold mb-2" [for]="id">{{ label }}</label>
+  <ng-container *ngIf="!fieldName; else formInputField">
+    <app-generic-input-field
+      [type]="type"
+      [inputValue]="inputValue"
+      (inputValueChange)="onTextTyped($event)"
+    ></app-generic-input-field>
+  </ng-container>
+
+  <ng-template #formInputField>
+    <app-form-input-field
+      [id]="id"
+      [type]="type"
+      [fieldName]="fieldName"
+      [maxLength]="maxLength"
+      [upperCase]="upperCase"
+      [lowerCase]="lowerCase"
+    ></app-form-input-field>
+  </ng-template>
+</div>
