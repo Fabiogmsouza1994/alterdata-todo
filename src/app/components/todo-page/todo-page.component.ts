@@ -62,7 +62,7 @@ export class TodoPageComponent implements OnInit {
   columnsToDisplay: tableColHeaderConfigModel[] = [
     { colHeaderText: 'Id usuário', colHeaderValue: 'userId', notEdit: true },
     { colHeaderText: 'Tarefa', colHeaderValue: 'title' },
-    { colHeaderText: 'Status', colHeaderValue: 'completed' },
+    { colHeaderText: 'Concluída', colHeaderValue: 'completed' },
   ];
 
   tableEditOptions: tableEditingModel = {
