@@ -1,3 +1,4 @@
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import {
@@ -8,6 +9,8 @@ import {
 import { TodoService } from './todo.service';
 import { TodoModel } from '../models/todo.model';
 import { ApiResponsesModel } from '../../../models/apis-responses.model';
+import { ResponseErrorHandlerService } from '../../../services/response-error-handler.service';
+import { AlertService } from '../../../services/alert.service';
 
 describe('TodoService', () => {
   let service: TodoService;
@@ -20,7 +23,14 @@ describe('TodoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TodoService, provideHttpClient(), provideHttpClientTesting()],
+      imports: [ToastrModule.forRoot()],
+      providers: [
+        TodoService,
+        ResponseErrorHandlerService,
+        AlertService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ]
     });
 
     service = TestBed.inject(TodoService);
