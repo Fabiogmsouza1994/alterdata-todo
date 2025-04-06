@@ -24,7 +24,7 @@ export class GenericDropdownFieldComponent<T> {
   allValuesAreBoolean(): boolean {
     return (
       this.dropdownItens?.dropdownList.every(
-        (item) => (item as { label: keyof T; value: boolean }).value === true
+        (item: T) => (item as { label: keyof T; value: boolean }).value === true
       ) ?? false
     );
   }

@@ -1,8 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -22,7 +19,7 @@ import {
   tableColHeaderConfigModel,
   tableEditingModel,
   TableFilterDataModel,
-  TableFilterModel
+  TableFilterModel,
 } from '../../utils/table/table.model';
 import { TableService } from '../../utils/table/table.service';
 import { TodoModel } from './models/todo.model';
@@ -65,8 +62,8 @@ export class TodoPageComponent implements OnInit {
   columnsToDisplay: tableColHeaderConfigModel[] = [
     { colHeaderText: 'Id usuário', colHeaderValue: 'userId', notEdit: true },
     { colHeaderText: 'Tarefa', colHeaderValue: 'title' },
-    { colHeaderText: 'Status', colHeaderValue: 'completed' }
-  ]
+    { colHeaderText: 'Status', colHeaderValue: 'completed' },
+  ];
 
   tableEditOptions: tableEditingModel = {
     allowAll: true,
@@ -76,20 +73,20 @@ export class TodoPageComponent implements OnInit {
     label: string;
     value: boolean;
   }> = {
-      dropdownLabel: 'label',
-      dropdownValue: 'value',
-      dropdownList: [
-        {
-          label: 'Concluído',
-          value: true,
-        },
+    dropdownLabel: 'label',
+    dropdownValue: 'value',
+    dropdownList: [
+      {
+        label: 'Concluído',
+        value: true,
+      },
 
-        {
-          label: 'Pendente',
-          value: false,
-        },
-      ],
-    };
+      {
+        label: 'Pendente',
+        value: false,
+      },
+    ],
+  };
 
   tableFilter: TableFilterModel<TableFilterDataModel> = {
     dropdownFieldLabel: 'Filtro de status',

@@ -1,10 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { FormDropdownFieldComponent } from './components/form-dropdown-field/form-dropdown-field.component';
 import { GenericDropdownFieldComponent } from './components/generic-dropdown-field/generic-dropdown-field.component';
