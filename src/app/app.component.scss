@@ -17,3 +17,9 @@ mat-progress-spinner {
   width: 80px !important;
   height: 80px !important;
 }
+
+.toolbar-logo {
+  height: 40px;
+  max-height: 100%;
+  object-fit: contain;
+}

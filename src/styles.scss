@@ -1,16 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'variables';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-toolbar {
+  background-color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1, h2, h3 {
+  color: variables.$title-color;
+}
+
+label {
+  color: variables.$label-color;
+}
+
+table {
+  background-color: #f1f2f3;
+}
 
 button.mat-mdc-raised-button:not([disabled]) {
-    background: linear-gradient(90deg, #4776e6, #8e54e9) !important;
-    color: white !important;
-    border-radius: 5px;
-    height: 38px;
-  }
+  background: linear-gradient(90deg, #4776e6, #8e54e9) !important;
+  color: white !important;
+  border-radius: 5px;
+  height: 38px;
+}
 
-  button.mat-mdc-raised-button[disabled] {
-    border-radius: 5px;
-    height: 38px;
-  }
+button.mat-mdc-raised-button[disabled] {
+  border-radius: 5px;
+  height: 38px;
+}
+
+.mat-icon {
+  color: variables.$icon-color;
+}
+
+.mat-cell,
+.mat-header-cell {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

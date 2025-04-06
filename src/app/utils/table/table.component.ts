@@ -12,11 +12,14 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { BooleanToTextPipe } from '../../pipes/boolean-to-text.pipe';
+import { DropdownFieldComponent } from '../dropdown-field/dropdown-field.component';
+import { InputFieldComponent } from '../input-field/input-field.component';
 import {
   tableColHeaderConfigModel,
   tableEditingModel,
@@ -24,8 +27,6 @@ import {
   TableFilterModel,
 } from './table.model';
 import { TableService } from './table.service';
-import { DropdownFieldComponent } from '../dropdown-field/dropdown-field.component';
-import { InputFieldComponent } from '../input-field/input-field.component';
 
 @Component({
   selector: 'app-table',
@@ -40,6 +41,7 @@ import { InputFieldComponent } from '../input-field/input-field.component';
     MatButtonModule,
     MatInputModule,
     FormsModule,
+    MatIconModule,
     InputFieldComponent,
     DropdownFieldComponent,
   ],

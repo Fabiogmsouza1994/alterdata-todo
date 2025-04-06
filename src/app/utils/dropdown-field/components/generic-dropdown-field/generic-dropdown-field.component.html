@@ -1,5 +1,15 @@
-<select class="col-12 p-1" [disabled]="disabled" [(ngModel)]="dropdownValue" (change)="onOptionSelected()">
-  <ng-container *ngIf="allValuesAreBoolean() || !!dropdownItens; else booleanFormattedOptions">
+<select
+  class="col-12 p-1 fs-6"
+  [disabled]="disabled"
+  [(ngModel)]="dropdownValue"
+  (change)="onOptionSelected()"
+>
+  <ng-container
+    *ngIf="
+      allValuesAreBoolean() || !!dropdownItens;
+      else booleanFormattedOptions
+    "
+  >
     <option
       *ngFor="let option of dropdownItens.dropdownList"
       [ngValue]="option"
