@@ -6,6 +6,7 @@ import {
 export interface tableColHeaderConfigModel {
   colHeaderText: string;
   colHeaderValue: string;
+  notEdit?: boolean;
 }
 
 export interface tableEditingModel {

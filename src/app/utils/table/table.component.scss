@@ -6,12 +6,12 @@ table {
 }
 
 .table-wrapper {
-  width: 100%;
   overflow-x: auto;
 }
 
 .table-icon {
   color: variables.$icon-color;
+  cursor: pointer;
   &:hover {
     color: variables.$hover;
   }

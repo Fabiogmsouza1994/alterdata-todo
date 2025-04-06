@@ -1,8 +1,8 @@
 <div class="table-wrapper col-12">
-  <div class="row">
+  <div class="row col-10">
     <ng-container *ngIf="tableFilter.inputFieldLabel">
       <app-input-field
-        class="col-12 col-md-3"
+        class="col-10 col-md-5"
         [label]="tableFilter.inputFieldLabel"
         [inputValue]="inputValue"
         (inputValueChange)="onTextTyped($event)"
@@ -10,7 +10,7 @@
     </ng-container>
     <ng-container *ngIf="tableFilter.dropdownDefinition">
       <app-dropdown-field
-        class="col-12 col-md-3"
+        class="col-10 col-md-5"
         [label]="tableFilter.dropdownFieldLabel"
         [dropdownValue]="dropDownSelectedValue"
         (dropdownValueChange)="onOptionSelected($event)"
@@ -34,7 +34,7 @@
         mat-cell
         *matCellDef="let row; let i = index"
       >
-        <ng-container *ngIf="editingRows[i]; else displayCell">
+        <ng-container *ngIf="editingRows[i] && !colHeader?.notEdit; else displayCell">
           <app-dropdown-field
             *ngIf="
               typeof row[colHeader.colHeaderValue] === 'boolean';

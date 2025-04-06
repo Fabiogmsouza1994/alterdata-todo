@@ -1,22 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { ApiResponsesModel } from '../models/apis-responses.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResponseErrorHandlerService {
-  
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private _alertService: AlertService) {}
 
   private _getErrorMessage(error: HttpErrorResponse): string {
-    if (!navigator.onLine) return 'Ops! Sem conexão com a internet.';
     switch (error.status) {
-      case 200:
-      case 204:
-        return 'Operação bem-sucedida.';
       case 400:
         return 'Ops! Operação não concluída devido a erro no sistema.';
       case 401:
@@ -46,7 +41,7 @@ export class ResponseErrorHandlerService {
       catchError((error: HttpErrorResponse) =>
         this._handleError(error).pipe(
           map((errorMsg: string) => {
-            this.snackBar.open(errorMsg, 'Fechar', { duration: 3000 });
+            this._alertService.error(errorMsg);
             return { success: false, error: errorMsg };
           })
         )

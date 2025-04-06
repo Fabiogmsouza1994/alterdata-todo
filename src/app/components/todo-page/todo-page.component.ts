@@ -61,10 +61,11 @@ export class TodoPageComponent implements OnInit {
 
   form: FormGroup;
   dataSource!: TodoModel[];
+
   columnsToDisplay: tableColHeaderConfigModel[] = [
-    {colHeaderText: 'Id usuário', colHeaderValue: 'userId'}, 
-    {colHeaderText: 'Tarefa', colHeaderValue: 'title'}, 
-    {colHeaderText: 'Status', colHeaderValue: 'completed'}
+    { colHeaderText: 'Id usuário', colHeaderValue: 'userId', notEdit: true },
+    { colHeaderText: 'Tarefa', colHeaderValue: 'title' },
+    { colHeaderText: 'Status', colHeaderValue: 'completed' }
   ]
 
   tableEditOptions: tableEditingModel = {
@@ -75,20 +76,20 @@ export class TodoPageComponent implements OnInit {
     label: string;
     value: boolean;
   }> = {
-    dropdownLabel: 'label',
-    dropdownValue: 'value',
-    dropdownList: [
-      {
-        label: 'Concluído',
-        value: true,
-      },
+      dropdownLabel: 'label',
+      dropdownValue: 'value',
+      dropdownList: [
+        {
+          label: 'Concluído',
+          value: true,
+        },
 
-      {
-        label: 'Pendente',
-        value: false,
-      },
-    ],
-  };
+        {
+          label: 'Pendente',
+          value: false,
+        },
+      ],
+    };
 
   tableFilter: TableFilterModel<TableFilterDataModel> = {
     dropdownFieldLabel: 'Filtro de status',
@@ -144,7 +145,7 @@ export class TodoPageComponent implements OnInit {
       title: this.form.get('taskDescription')?.value,
       completed: this.form.get('taskStatus')?.value,
     };
-    
+
     this._service
       .addData(body)
       .subscribe((resp: ApiResponsesModel<TodoModel>) => {

@@ -1,9 +1,4 @@
-@use 'variables';
-
-.mat-toolbar {
-  background-color: white !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+@use "variables" as *;
 
 html,
 body {
@@ -12,21 +7,48 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-h1, h2, h3 {
-  color: variables.$title-color;
+html {
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  color: $title-color;
+}
+
+h1 {
+  font-size: $title-font-size;
+  padding-bottom: 2%;
+  border-bottom: 2px solid $secondary-border-colors;
+  width: 100%;
+  margin-bottom: 4vh;
+}
+
+h2 {
+  font-size: $sub-title-font-size;
+}
+
+.mat-toolbar {
+  background-color: $primary-background !important;
+  box-shadow: $shadow;
 }
 
 label {
-  color: variables.$label-color;
+  color: $label-color;
 }
 
 table {
-  background-color: #f1f2f3;
+  background-color: $secondary-background;
+}
+
+button.mat-mdc-raised-button {
+  font-size: $default-font-size;
 }
 
 button.mat-mdc-raised-button:not([disabled]) {
-  background: linear-gradient(90deg, #4776e6, #8e54e9) !important;
-  color: white !important;
+  background-color: $button-background;
+  color: $button-font-color;
   border-radius: 5px;
   height: 38px;
 }
@@ -34,10 +56,11 @@ button.mat-mdc-raised-button:not([disabled]) {
 button.mat-mdc-raised-button[disabled] {
   border-radius: 5px;
   height: 38px;
+  background-color: $disabled-buttom-background;
 }
 
 .mat-icon {
-  color: variables.$icon-color;
+  color: $icon-color;
 }
 
 .mat-cell,
