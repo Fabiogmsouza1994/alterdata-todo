@@ -116,7 +116,7 @@ export class TodoPageComponent implements OnInit {
 
   onUpdateRow(receivedRow: TodoModel): void {
     if (!receivedRow.title || receivedRow.title.length < 5)
-      this._alertService.info('O campo não pode estar vazio e de ter ao menos 5 caracteres.');
+      this._alertService.info('O campo não pode estar vazio e deve ter ao menos 5 caracteres.');
     else
       this._service
         .updateData(receivedRow.id as number, receivedRow)
