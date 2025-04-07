@@ -73,6 +73,21 @@ describe('TodoService', () => {
     req.flush(newTodo);
   });
 
+  it('Deve buscar um dado mediante o id com sucesso', () => {
+    service
+      .getDataById(mockTodos[0].id as number)
+      .subscribe((resp: ApiResponsesModel<TodoModel>) => {
+        expect(mockTodos[0]).toEqual(resp.data as TodoModel);
+      });
+
+    const req: TestRequest = httpMock.expectOne(
+      `${service.url}/${mockTodos[0].id}`
+    );
+
+    expect(req.request.method).toBe('GET');
+    req.flush(mockTodos[0]);
+  });
+
   it('Deve atualizar um dado mediante o id com sucesso', () => {
     mockTodos[0].title = 'to be hired';
 
