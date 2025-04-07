@@ -69,6 +69,7 @@ export class TableComponent<T, U extends TableFilterDataModel>
   dataSource!: MatTableDataSource<T>;
   dropDownSelectedValue!: U;
   inputValue: string | number = '';
+  isEditInputEmpty: boolean = true;
 
   private _rowToDelete!: T;
 
