@@ -21,8 +21,6 @@ export class FormInputFieldComponent implements OnInit {
   @Input() fieldName!: string;
   @Input() label!: string;
   @Input() maxLength!: string;
-  @Input() upperCase!: boolean;
-  @Input() lowerCase!: boolean;
 
   formControl!: FormControl;
   isFocused!: boolean;

@@ -22,8 +22,6 @@ export class InputFieldComponent {
   @Input() fieldName!: string;
   @Input() label!: string;
   @Input() maxLength!: string;
-  @Input() upperCase!: boolean;
-  @Input() lowerCase!: boolean;
   @Input() inputValue!: string | number;
   @Input() disabled: boolean = false;
   @Output() isEmpty: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -32,7 +30,6 @@ export class InputFieldComponent {
   >();
 
   onTextTyped(text: string | number): void {
-    this.isEmpty.emit(!Number.isNaN(Number(text)) ? false : !!text);
     this.inputValueChange.emit(text);
   }
 }

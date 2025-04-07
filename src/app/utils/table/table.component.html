@@ -46,7 +46,6 @@
           <ng-template #normalInput>
             <app-input-field
               class="w-100"
-              (isEmpty)="isEditInputEmpty = $event"
               [(inputValue)]="row[colHeader.colHeaderValue]"
               ></app-input-field>
           </ng-template>
@@ -94,7 +93,6 @@
         <ng-container *ngIf="editingRows[i]; else editButton">
           <span class="d-flex align-items-center flex-column">
             <mat-icon
-              *ngIf="isEditInputEmpty"
               fontIcon="check"
               class="my-1 table-icon"
               (click)="saveRow(row, i)"
