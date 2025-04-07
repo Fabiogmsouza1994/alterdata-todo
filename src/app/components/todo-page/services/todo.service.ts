@@ -12,24 +12,24 @@ export class TodoService {
   readonly url: string = 'https://jsonplaceholder.typicode.com/todos';
 
   constructor(
-    private httpClient: HttpClient,
-    private _handleErrorService: ResponseErrorHandlerService
+    private readonly _httpClient: HttpClient,
+    private readonly _handleErrorService: ResponseErrorHandlerService
   ) {}
 
   getDataById(id: string | number): Observable<ApiResponsesModel<TodoModel>> {
-    return this.httpClient
+    return this._httpClient
       .get<TodoModel>(`${this.url}/${id}`)
       .pipe(this._handleErrorService.handleRequest<TodoModel>);
   }
 
   getAllData(): Observable<ApiResponsesModel<TodoModel[]>> {
-    return this.httpClient
+    return this._httpClient
       .get<TodoModel[]>(this.url)
       .pipe(this._handleErrorService.handleRequest<TodoModel[]>);
   }
 
   addData(data: TodoModel): Observable<ApiResponsesModel<TodoModel>> {
-    return this.httpClient
+    return this._httpClient
       .post<TodoModel>(this.url, data)
       .pipe(this._handleErrorService.handleRequest<TodoModel>);
   }
@@ -38,13 +38,13 @@ export class TodoService {
     id: number,
     data: TodoModel
   ): Observable<ApiResponsesModel<TodoModel>> {
-    return this.httpClient
+    return this._httpClient
       .patch<TodoModel>(`${this.url}/${id}`, data)
       .pipe(this._handleErrorService.handleRequest<TodoModel>);
   }
 
   removeData(id: number): Observable<ApiResponsesModel<TodoModel>> {
-    return this.httpClient
+    return this._httpClient
       .delete<TodoModel>(`${this.url}/${id}`)
       .pipe(this._handleErrorService.handleRequest<TodoModel>);
   }
