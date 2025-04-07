@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
-import { TodoModel } from '../models/todo.model';
-import { ResponseErrorHandlerService } from '../../../services/response-error-handler.service';
+import { Observable } from 'rxjs';
 import { ApiResponsesModel } from '../../../models/apis-responses.model';
+import { ResponseErrorHandlerService } from '../../../services/response-error-handler.service';
+import { TodoModel } from '../models/todo.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,12 @@ export class TodoService {
     private httpClient: HttpClient,
     private _handleErrorService: ResponseErrorHandlerService
   ) {}
+
+  getDataById(id: string | number): Observable<ApiResponsesModel<TodoModel>> {
+    return this.httpClient
+      .get<TodoModel>(`${this.url}/${id}`)
+      .pipe(this._handleErrorService.handleRequest<TodoModel>);
+  }
 
   getAllData(): Observable<ApiResponsesModel<TodoModel[]>> {
     return this.httpClient

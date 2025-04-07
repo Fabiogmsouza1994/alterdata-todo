@@ -2,7 +2,7 @@
   <div class="row col-12">
     <ng-container *ngIf="tableFilter.inputFieldLabel">
       <app-input-field
-        class="col-12 col-md-4"
+        class="col-12 col-md-5"
         [label]="tableFilter.inputFieldLabel"
         [inputValue]="inputValue"
         (inputValueChange)="onTextTyped($event)"
@@ -10,7 +10,7 @@
     </ng-container>
     <ng-container *ngIf="tableFilter.dropdownDefinition">
       <app-dropdown-field
-        class="col-12 col-md-4"
+        class="col-12 col-md-5"
         [label]="tableFilter.dropdownFieldLabel"
         [dropdownValue]="dropDownSelectedValue"
         (dropdownValueChange)="onOptionSelected($event)"

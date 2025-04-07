@@ -1,31 +1,59 @@
 <form [formGroup]="form" class="mb-3">
   <h1>Gerenciamento de tarefas</h1>
-  <div class="row">
-    <app-input-field
-      class="col-12 col-md-5"
-      type="text"
-      id="taskDescription"
-      fieldName="taskDescription"
-      maxLength="25"
-      label="Descrição tarefa"
-    ></app-input-field>
+  <mat-tab-group
+    dynamicHeight
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    class="col-12 w-auto"
+  >
+    <mat-tab label="Adicionar tarefa" class="d-flex align-items-center">
+      <div class="row col-12 px-1">
+        <app-input-field
+          class="col-12 col-md-5"
+          type="text"
+          id="taskDescription"
+          fieldName="taskDescription"
+          maxLength="150"
+          label="Descrição tarefa"
+        ></app-input-field>
 
-    <app-dropdown-field
-      class="col-12 col-md-5"
-      label="Status tarefa"
-      fieldName="taskStatus"
-      [dropdownItens]="dropdownItens"
-    ></app-dropdown-field>
+        <app-dropdown-field
+          class="col-12 col-md-5"
+          label="Status tarefa"
+          fieldName="taskStatus"
+          [dropdownItens]="dropdownItens"
+        ></app-dropdown-field>
 
-    <button
-      class="col-12 col-md-2 mt-5"
-      mat-raised-button
-      [disabled]="form.invalid"
-      (click)="onInsertInTable()"
-    >
-      Inserir
-    </button>
-  </div>
+        <button
+          class="col-12 col-md-2 mt-5"
+          mat-raised-button
+          (click)="onInsertInTable()"
+        >
+          Inserir
+        </button>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Busca por id">
+      <div class="row col-12 px-1">
+        <app-input-field
+          class="col-12 col-md-5"
+          type="text"
+          id="taskDescription"
+          fieldName="taskId"
+          maxLength="4"
+          label="Id da tarefa"
+        ></app-input-field>
+        <button
+          class="col-12 col-md-2 mt-5"
+          mat-raised-button
+          (click)="filterById(this.form.get('taskId')?.value)"
+        >
+          Buscar
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </form>
 
 <div class="row">

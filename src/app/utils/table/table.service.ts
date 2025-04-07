@@ -4,25 +4,32 @@ import { Observable, Subject } from 'rxjs';
 @Injectable()
 export class TableService<T> {
   private _succesfullyUpdatedRow: Subject<void> = new Subject<void>();
-  private _succesfullyremovedRow: Subject<void> = new Subject<void>();
-  private _succesfullycreatedRow: Subject<T> = new Subject<T>();
+  private _succesfullyRemovedRow: Subject<void> = new Subject<void>();
+  private _succesfullyCreatedRow: Subject<T> = new Subject<T>();
+  private _succesfullyExternalFilter: Subject<string> = new Subject<string>();
 
   succesfullyUpdatedRow$: Observable<void> =
     this._succesfullyUpdatedRow.asObservable();
-  succesfullyremovedRow$: Observable<void> =
-    this._succesfullyremovedRow.asObservable();
-  succesfullycreatedRow$: Observable<T> =
-    this._succesfullycreatedRow.asObservable();
+  succesfullyRemovedRow$: Observable<void> =
+    this._succesfullyRemovedRow.asObservable();
+  succesfullyCreatedRow$: Observable<T> =
+    this._succesfullyCreatedRow.asObservable();
+  succesfullyExternalFilter$: Observable<string> =
+    this._succesfullyExternalFilter.asObservable();
 
   updatedRowSuccesfully(): void {
     this._succesfullyUpdatedRow.next();
   }
 
   removedRowSuccesfully(): void {
-    this._succesfullyremovedRow.next();
+    this._succesfullyRemovedRow.next();
   }
 
   createdRowSuccesfully(row: T): void {
-    this._succesfullycreatedRow.next(row);
+    this._succesfullyCreatedRow.next(row);
+  }
+
+  externalFilterSuccesfully(data: string): void {
+    this._succesfullyExternalFilter.next(data);
   }
 }

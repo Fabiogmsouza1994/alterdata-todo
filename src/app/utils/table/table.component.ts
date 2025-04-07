@@ -57,6 +57,7 @@ export class TableComponent<T, U extends TableFilterDataModel>
   @Input() columnsToDisplay!: tableColHeaderConfigModel[];
   @Input() editOptions!: tableEditingModel;
   @Input() tableFilter!: TableFilterModel<U>;
+  @Input() externalFilterValue!: string;
   @Output() deletedRow: EventEmitter<T> = new EventEmitter<T>();
   @Output() updatedRow: EventEmitter<T> = new EventEmitter<T>();
 
@@ -81,6 +82,7 @@ export class TableComponent<T, U extends TableFilterDataModel>
     this.rowsInsertionControl();
     this.rowsExclusionControl();
     this.rowsUpdateControl();
+    this.onExternalFilterControl();
   }
 
   filter(): void {
@@ -124,7 +126,7 @@ export class TableComponent<T, U extends TableFilterDataModel>
   }
 
   rowsInsertionControl(): void {
-    this._tableService.succesfullycreatedRow$.subscribe((resp: T) => {
+    this._tableService.succesfullyCreatedRow$.subscribe((resp: T) => {
       if (resp) this.dataSource.data = [resp, ...this.dataSource.data];
     });
   }
@@ -134,7 +136,7 @@ export class TableComponent<T, U extends TableFilterDataModel>
       (this.editOptions.allowAll || this.editOptions.allowExclusion) &&
       this.id
     )
-      this._tableService.succesfullyremovedRow$.subscribe(
+      this._tableService.succesfullyRemovedRow$.subscribe(
         () =>
           (this.dataSource.data = this.dataSource.data.filter(
             (row: T) =>
@@ -152,6 +154,14 @@ export class TableComponent<T, U extends TableFilterDataModel>
       });
     }
   }
+
+  onExternalFilterControl(): void {
+    this._tableService.succesfullyExternalFilter$.subscribe((resp: string) => {
+      this.dataSource.filter = resp;
+
+      this._cdr.detectChanges();
+    });
+    }
 
   onDeleteRow(row: T): void {
     this._rowToDelete = row;

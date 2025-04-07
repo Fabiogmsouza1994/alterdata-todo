@@ -24,6 +24,7 @@ import {
 import { TableService } from '../../utils/table/table.service';
 import { TodoModel } from './models/todo.model';
 import { TodoService } from './services/todo.service';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-todo-page',
@@ -35,6 +36,7 @@ import { TodoService } from './services/todo.service';
     MatButtonModule,
     CommonModule,
     ToastrModule,
+    MatTabsModule
   ],
   providers: [AlertService, TableService],
   templateUrl: './todo-page.component.html',
@@ -51,6 +53,7 @@ export class TodoPageComponent implements OnInit {
     this.form = this._fb.group({
       taskDescription: ['', [Validators.required, Validators.minLength(5)]],
       taskStatus: ['', [Validators.required]],
+      taskId: ['', Validators.required],
     });
 
     this.dataSource = this._route.snapshot.data['todos'].data;
@@ -154,5 +157,15 @@ export class TodoPageComponent implements OnInit {
           this._tableService.createdRowSuccesfully(body);
         }
       });
+  }
+
+  filterById(idValue: string | number): void {
+    this._service.getDataById(idValue).subscribe((resp: ApiResponsesModel<TodoModel>) => {
+      if(resp) {
+        this._alertService.success('Id encontrado com sucesso!');
+        this._tableService.externalFilterSuccesfully(resp.data?.title as string);
+      }
+
+    })
   }
 }
