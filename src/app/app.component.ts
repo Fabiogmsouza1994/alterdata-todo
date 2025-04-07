@@ -3,7 +3,6 @@ import {
   AfterViewInit,
   Component,
   Inject,
-  OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
