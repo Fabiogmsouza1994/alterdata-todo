@@ -46,7 +46,7 @@
           <ng-template #normalInput>
             <app-input-field
               class="w-100"
-              (isEmptyText)="isEditInputEmpty = $event"
+              (isEmpty)="isEditInputEmpty = $event"
               [(inputValue)]="row[colHeader.colHeaderValue]"
               ></app-input-field>
           </ng-template>

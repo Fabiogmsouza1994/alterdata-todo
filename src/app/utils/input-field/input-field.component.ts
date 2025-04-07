@@ -26,13 +26,13 @@ export class InputFieldComponent {
   @Input() lowerCase!: boolean;
   @Input() inputValue!: string | number;
   @Input() disabled: boolean = false;
-  @Output() isEmptyText: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() isEmpty: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() inputValueChange: EventEmitter<string | number> = new EventEmitter<
     string | number
   >();
 
   onTextTyped(text: string | number): void {
-    this.isEmptyText.emit(!Number.isNaN(Number(text)) ? false : !!text);
+    this.isEmpty.emit(!Number.isNaN(Number(text)) ? false : !!text);
     this.inputValueChange.emit(text);
   }
 }
